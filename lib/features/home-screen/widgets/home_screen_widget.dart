@@ -1,3 +1,5 @@
+import 'package:keepnote/features/details-page/view/details_page_view.dart';
+
 import '../../../app/index.dart';
 
 class HomeScreenWidget extends StatefulWidget {
@@ -84,39 +86,56 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                          itemCount: 6,
                          scrollDirection: Axis.vertical,
                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                           crossAxisCount: 2,  // Number of columns
-                           crossAxisSpacing: 15, // Space between columns
-                           mainAxisSpacing: 20, // Space between rows
-                           childAspectRatio: 0.75, // Width-to-height ratio
+                           crossAxisCount: 2,
+                           crossAxisSpacing: 15,
+                           mainAxisSpacing: 20,
+                           childAspectRatio: 0.75,
                          ),
                          itemBuilder: (BuildContext context, int index) {
-                             return Container(
-                               height: 200,
-                               width: 150,
-                               decoration: BoxDecoration(
-                                   color:  widget.viewModel.colorListAccordingToPriority[index],
-                                   borderRadius: BorderRadius.circular(25),
-                                   boxShadow: [
-                                     BoxShadow(
-                                       color: widget.viewModel.colorListAccordingToPriority[index],
-                                       blurRadius: 1
-                                     )
-                                   ]
-                               ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 10,top:18.0),
-                                      child: Text(
-                                        widget.viewModel.priorityList[index],
-                                        style: TextStyle(
-                                          fontSize: 25
+                             return InkWell(
+                               onTap: (){
+                                 Navigator.push(context, MaterialPageRoute(builder: (_) => DetailsPage()));
+                               },
+                               child: Container(
+                                 height: 200,
+                                 width: 150,
+                                 decoration: BoxDecoration(
+                                     color:  widget.viewModel.colorListAccordingToPriority[index],
+                                     borderRadius: BorderRadius.circular(25),
+                                     boxShadow: [
+                                       BoxShadow(
+                                         color: widget.viewModel.colorListAccordingToPriority[index],
+                                         blurRadius: 1
+                                       )
+                                     ]
+                                 ),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(left: 10,top:18.0),
+                                        child: Text(
+                                          widget.viewModel.priorityList[index],
+                                          style: TextStyle(
+                                            fontSize: 25
+                                          ),
                                         ),
                                       ),
-                                    )
-                                  ],
-                                ),
+                                      Container(
+                                        padding: const EdgeInsets.only(left: 10,top:18.0),
+                                        height: 150,
+                                        child : ListView.builder(
+                                          itemCount: widget.viewModel.allNotesList[index].length,
+                                          itemBuilder: (context,subIndex){
+                                            return Text(
+                                                widget.viewModel.allNotesList[index][subIndex].title
+                                            );
+                                          },
+                                        )
+                                      )
+                                    ],
+                                  ),
+                               ),
                              );
                          },),
                      ),
