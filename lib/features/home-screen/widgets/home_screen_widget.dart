@@ -1,5 +1,3 @@
-import 'package:keepnote/features/details-page/view/details_page_view.dart';
-
 import '../../../app/index.dart';
 
 class HomeScreenWidget extends StatefulWidget {
@@ -74,7 +72,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                        borderRadius: BorderRadius.circular(18)
                      ),
                      child: Text(
-                       "All (20)"
+                       "${Strings.allWithSpace}(${widget.viewModel.count})"
                      ),
                    ),
                    SizedBox(height: 20,),
@@ -94,7 +92,10 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                          itemBuilder: (BuildContext context, int index) {
                              return InkWell(
                                onTap: (){
-                                 Navigator.push(context, MaterialPageRoute(builder: (_) => DetailsPage()));
+                                 Navigator.push(context, MaterialPageRoute(
+                                     builder: (_) => DetailsPage(listColor: widget.viewModel.colorListAccordingToPriority[index],heading:  widget.viewModel.priorityList[index],notesList: widget.viewModel.allNotesList[index],)
+                                 )
+                                 );
                                },
                                child: Container(
                                  height: 200,

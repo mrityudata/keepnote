@@ -13,5 +13,8 @@ class Strings{
   static const college = "College";
   static const market = "Market";
   static const mayBeLater = "May be later";
+  static const noItemsHere = "No items here";
   static const pleaseFillRequire = "Please fill all the required fields.";
+  static const allWithSpace = "All ";
+  static const editNote = "Edit Note";
 }

@@ -4,6 +4,7 @@ class HomeScreenViewModel{
   late HomeBloc _homeBloc;
   HomeBloc get  homeBloc => _homeBloc;
   late final String todayDate;
+  int count = 0;
   List<List<NotesModel>> allNotesList = [];
   List<NotesModel> urgentList = [];
   List<NotesModel> goalsList = [];
@@ -13,52 +14,57 @@ class HomeScreenViewModel{
   List<NotesModel> laterList = [];
 
 
-  List<String> priorityList = ["Urgent","My Goals","Home","College","Market","May be later"];
+  List<String> priorityList = [Strings.urgent,Strings.myGoals,Strings.home,Strings.college,Strings.market,Strings.mayBeLater];
   List<Color> colorListAccordingToPriority = [Colors.red,Colors.purple,Colors.green,Colors.orange,Colors.yellow,Colors.blue];
 
   //init function
   init(){
     formatDate();
-    _homeBloc = HomeBloc()..add(HomeScreenLoadedEvent(dateTime: todayDate,goalsList: goalsList));
     getAllList();
     addAllList();
+    _homeBloc = HomeBloc()..add(HomeScreenLoadedEvent(dateTime: todayDate,goalsList: goalsList,count: count));
   }
   //function to format date
   void formatDate(){
     todayDate = DateFormat('EEE, yyyy, MM, dd').format(DateTime.now());
-    log(todayDate);
   }
 
-  //get note list
 
+  //get note list
   void getUrgentList() async {
-    List<NotesModel> urgentData = await DatabaseHelper().getNoteList("Urgent");
+    List<NotesModel> urgentData = await DatabaseHelper().getNoteList(Strings.urgent);
     urgentList.addAll(urgentData);
+    count += urgentList.length;
   }
 
   void getGoalList() async {
-    List<NotesModel> goalList = await DatabaseHelper().getNoteList("My Goals");
+    List<NotesModel> goalList = await DatabaseHelper().getNoteList(Strings.myGoals);
     goalsList.addAll(goalList);
+    count += goalsList.length;
   }
 
   void getHomeList() async {
-    List<NotesModel> homeData = await DatabaseHelper().getNoteList("Home");
+    List<NotesModel> homeData = await DatabaseHelper().getNoteList(Strings.home);
     homeList.addAll(homeData);
+    count += homeList.length;
   }
 
   void getCollegeList() async {
-    List<NotesModel> collegeData = await DatabaseHelper().getNoteList("College");
+    List<NotesModel> collegeData = await DatabaseHelper().getNoteList(Strings.college);
     collegeList.addAll(collegeData);
+    count += collegeList.length;
   }
 
   void getMarketList() async {
-    List<NotesModel> marketData = await DatabaseHelper().getNoteList("Market");
+    List<NotesModel> marketData = await DatabaseHelper().getNoteList(Strings.market);
     marketList.addAll(marketData);
+    count += marketList.length;
   }
 
   void getMayBeLaterList() async {
-    List<NotesModel> mayBeLaterData = await DatabaseHelper().getNoteList("May be later");
+    List<NotesModel> mayBeLaterData = await DatabaseHelper().getNoteList(Strings.mayBeLater);
     laterList.addAll(mayBeLaterData);
+    count += laterList.length;
   }
 
   //get All List from DB
@@ -80,5 +86,6 @@ class HomeScreenViewModel{
     allNotesList.add(marketList);
     allNotesList.add(laterList);
   }
+
 
 }

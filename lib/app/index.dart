@@ -4,6 +4,8 @@ export 'dart:developer' hide Flow;
 export 'package:flutter_bloc/flutter_bloc.dart';
 export 'package:intl/intl.dart' hide TextDirection;
 export 'package:uuid/uuid.dart';
+export 'package:flutter/services.dart';
+
 
 
 //files exports
@@ -23,6 +25,22 @@ export 'package:keepnote/features/add-new-note/viewmodel/add_new_note_viewmodel.
 export 'package:keepnote/model/notes.dart';
 export 'package:keepnote/database/database_helper.dart';
 export '../../../utils/const/colors.dart';
+export 'package:keepnote/features/details-page/event/details_page_event.dart';
+export 'package:keepnote/features/details-page/state/details_page_state.dart';
+export 'package:keepnote/features/details-page/bloc/details_page_bloc.dart';
+export 'package:keepnote/features/details-page/widgets/details_page_widget.dart';
+export 'package:keepnote/features/details-page/view_model/details_page_viewmodel.dart';
+export 'package:keepnote/features/details-page/view/details_page_view.dart';
+export 'package:keepnote/features/edit-note/widget/edit_note_widget.dart';
+export 'package:keepnote/features/edit-note/view/edit_note.dart';
+export 'package:keepnote/features/edit-note/viewmodel/edit_note_viewmodel.dart';
+
+
+
+
+
+
+
 
 
 

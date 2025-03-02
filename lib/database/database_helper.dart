@@ -49,4 +49,18 @@ class DatabaseHelper{
   return result.map( (element) => NotesModel.fromJson(element)).toList();
  }
 
+ Future<int> updateNote(String id, String newTitle, String newDescription) async {
+   final db = await database;
+   final result = await db!.update(
+       'notes',
+       {
+        'title' : newTitle,
+        'description' : newDescription
+       },
+    where: 'id = ?',
+    whereArgs: [id]
+   );
+   return result;
+ }
+
 }

@@ -36,10 +36,10 @@ class _AddNewNoteState extends State<AddNewNote> {
           ),
         ),
       ),
-      body: AddNewNoteWidget(viewModel: viewModel,),
+      body: AddNewNoteWidget(viewModel: viewModel),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).primaryColor,
-        child: Icon(Icons.check, size: 24,color: Colors.orange.shade100,),
+        child: Icon(Icons.check, size: 24,color: Colors.black,),
           onPressed: (){
           if(viewModel.validation()){
             viewModel.setFinalValues();

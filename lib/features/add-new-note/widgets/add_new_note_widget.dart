@@ -1,4 +1,3 @@
-import 'package:flutter/services.dart';
 import '../../../app/index.dart';
 
 class AddNewNoteWidget extends StatefulWidget {
@@ -34,6 +33,7 @@ class _AddNewNoteWidgetState extends State<AddNewNoteWidget> {
                 top: 25
                 ),
                 child: DropdownButton<String>(
+                  underline: Container(),
                   dropdownColor: Theme.of(context).primaryColor,
                 hint: Text(Strings.addTag),
                   value: widget.viewModel.selectedPriority,
@@ -75,7 +75,7 @@ class _AddNewNoteWidgetState extends State<AddNewNoteWidget> {
             child: TextField(
               maxLines: 100,
               decoration: InputDecoration(
-                  hintText: "Description",
+                  hintText: Strings.description,
                   border: InputBorder.none,
                   hintStyle: TextStyle(
                     fontSize: 23,

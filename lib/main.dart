@@ -16,9 +16,9 @@ class MyApp extends StatelessWidget{
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
           fontFamily: fontFamilyWorkSans,
-          primaryColor: common,
+          primaryColor: ivory,
           brightness: Brightness.light,
-          scaffoldBackgroundColor: Colors.orange.shade100,
+          scaffoldBackgroundColor: ivory,
           textTheme: TextTheme(
             bodyLarge: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
             bodyMedium: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),

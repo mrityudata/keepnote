@@ -8,3 +8,6 @@ const Color offWhite = Color(0xffFFFAFA);
 const Color creamDark = Color(0xffDFC3C2);
 const Color almond = Color(0xffE5E0D8);
 const Color common = Color(0xff565C8D);
+const Color ivory = Color(0xffFFFFF0);
+const Color lightPurple = Color(0xffF8E3FA);
+const Color greVariant = Color(0xffC1BAA1);
