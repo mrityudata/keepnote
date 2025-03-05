@@ -9,6 +9,28 @@ class HomeScreenWidget extends StatefulWidget {
 }
 
 class _HomeScreenWidgetState extends State<HomeScreenWidget> {
+
+  late StreamSubscription<dynamic> actionSubscription;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  _listenForAction(){
+    log("called");
+    actionSubscription = GlobalActionManager().eventStream.listen( (event){
+      log("isUpdated-1 ${event is HomeScreenAction}");
+      if(event is HomeScreenAction){
+        log("isUpdated0 ${event.isUpdated}");
+        if(event.isUpdated){
+          log("isUpdated1 ${event.isUpdated}");
+          widget.viewModel.updateUI();
+        }
+      }
+    } );
+  }
+
   @override
   Widget build(BuildContext context) {
     return
@@ -25,9 +47,9 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                  children: [
                    Padding(
                      padding: EdgeInsets.only(
-                         top: 15,
-                         left: 15,
-                         right: 15
+                         top: ScreenSize.height(context) * 0.018,
+                         left: ScreenSize.width(context) * 0.04,
+                         right: ScreenSize.width(context) * 0.04
                      ),
                      child: Row(
                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -54,7 +76,8 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                            onTap: () async {
                              final result = await Navigator.pushNamed(context, AppRoutes.addNewNote);
                              if(result == true){
-
+                               log("rrr $result");
+                               _listenForAction();
                              }
                            },
                              child: Icon(Icons.add_task_sharp,size: 30,))
@@ -62,8 +85,8 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                      ),
                    ),
                    Container(
-                     margin: EdgeInsets.only( left: 15,top: 60),
-                     padding: EdgeInsets.symmetric(horizontal: 20,vertical: 3),
+                     margin: EdgeInsets.only(left: ScreenSize.width(context) * 0.04,top: ScreenSize.height(context) * 0.07),
+                     padding: EdgeInsets.symmetric(horizontal: ScreenSize.width(context) * 0.05,vertical: ScreenSize.height(context) * 0.003),
                      decoration: BoxDecoration(
                        border: Border.all(
                          color: Colors.black,
@@ -75,10 +98,10 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                        "${Strings.allWithSpace}(${widget.viewModel.count})"
                      ),
                    ),
-                   SizedBox(height: 20,),
+                   SizedBox(height: ScreenSize.height(context) * 0.025,),
                    Expanded(
                      child: Container(
-                       margin: EdgeInsets.symmetric(horizontal: 10),
+                       margin: EdgeInsets.symmetric(horizontal: ScreenSize.width(context) * 0.026),
                        child: GridView.builder(
                          physics: BouncingScrollPhysics(),
                          itemCount: 6,
@@ -98,8 +121,8 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                  );
                                },
                                child: Container(
-                                 height: 200,
-                                 width: 150,
+                                 height: ScreenSize.height(context) * 0.24,
+                                 width: ScreenSize.width(context) * 0.4,
                                  decoration: BoxDecoration(
                                      color:  widget.viewModel.colorListAccordingToPriority[index],
                                      borderRadius: BorderRadius.circular(25),
@@ -114,22 +137,20 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Padding(
-                                        padding: const EdgeInsets.only(left: 10,top:18.0),
-                                        child: Text(
-                                          widget.viewModel.priorityList[index],
+                                        padding: EdgeInsets.only(left: ScreenSize.width(context) * 0.025, top: ScreenSize.height(context) * 0.022),
+                                        child: Text(widget.viewModel.priorityList[index],
                                           style: TextStyle(
                                             fontSize: 25
                                           ),
                                         ),
                                       ),
                                       Container(
-                                        padding: const EdgeInsets.only(left: 10,top:18.0),
-                                        height: 150,
+                                        padding: EdgeInsets.only(left: ScreenSize.width(context) * 0.03, top: ScreenSize.height(context) * 0.022),
+                                        height: ScreenSize.height(context) * 0.220,
                                         child : ListView.builder(
-                                          itemCount: widget.viewModel.allNotesList[index].length,
+                                          itemCount: state.allNotesList![index].length,
                                           itemBuilder: (context,subIndex){
-                                            return Text(
-                                                widget.viewModel.allNotesList[index][subIndex].title
+                                            return Text(state.allNotesList![index][subIndex].title
                                             );
                                           },
                                         )

@@ -1,7 +1,5 @@
-import 'package:keepnote/utils/common_widgets/screen_size.dart';
 
 import '../../../app/index.dart';
-
 class DetailsPageWidget extends StatefulWidget{
   final DetailsPageViewmodel viewmodel;
   const DetailsPageWidget({super.key,required this.viewmodel});
@@ -29,7 +27,7 @@ class _DetailsPageWidget extends State<DetailsPageWidget>{
                   itemCount: state.noteList.length,
                     itemBuilder: (context,index){
                       return Container(
-                        height: ScreenSize.height(context) * 0.20,
+                        height: ScreenSize.height(context) * 0.25,
                         margin: EdgeInsets.symmetric(horizontal: ScreenSize.width(context) * 0.05,vertical: ScreenSize.height(context) * 0.012),
                         decoration: BoxDecoration(
                           color: state.color,
@@ -41,7 +39,8 @@ class _DetailsPageWidget extends State<DetailsPageWidget>{
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(state.noteList[index].title,
+                              Text(
+                                state.noteList[index].title,
                                 style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold
@@ -65,7 +64,7 @@ class _DetailsPageWidget extends State<DetailsPageWidget>{
                                     },
                                     child: Icon(Icons.edit,size: 20,
                                     ),
-                                  ))
+                                  )),
                             ],
                           ),
                         ),

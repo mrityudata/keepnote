@@ -2,13 +2,13 @@ import 'package:keepnote/app/index.dart';
 
 abstract class HomeEvent{}
 
-class HomeScreenLoadingEvent implements HomeEvent{
+class HomeScreenLoadingEvent extends HomeEvent{
 
 }
 
-class HomeScreenLoadedEvent implements HomeEvent{
+class HomeScreenLoadedEvent extends HomeEvent{
   String dateTime;
   int count;
-  List<NotesModel>? goalsList = [];
-  HomeScreenLoadedEvent({required this.dateTime, this.goalsList,required this.count});
+  List<List<NotesModel>>? allNotesList = [];
+  HomeScreenLoadedEvent({required this.dateTime, this.allNotesList,required this.count});
 }

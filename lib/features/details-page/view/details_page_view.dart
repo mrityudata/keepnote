@@ -16,7 +16,7 @@ class _DetailsPageState extends State<DetailsPage>{
   @override
   void initState() {
     super.initState();
-    detailsPageViewmodel.setDataOfList(paramNotesList: widget.notesList,color: widget.listColor);
+    detailsPageViewmodel.setDataOfList(paramNotesList: widget.notesList,color: widget.listColor,heading: widget.heading);
     detailsPageViewmodel.init();
   }
   @override

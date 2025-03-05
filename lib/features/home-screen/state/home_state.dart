@@ -1,17 +1,20 @@
 import 'package:keepnote/app/index.dart';
 
-abstract class HomeState{}
+abstract class HomeState extends Equatable{}
 
-class HomeScreenLoadingState implements HomeState{
+class HomeScreenLoadingState extends HomeState{
+  @override
+  List<Object?> get props => [];
 
 }
 
-class HomeScreenLoadedState implements HomeState{
-  String dateTime;
-  int count;
-  List<NotesModel>? goalsList = [];
-  HomeScreenLoadedState({required this.dateTime, this.goalsList,required this.count});
+class HomeScreenLoadedState extends HomeState{
+  final String dateTime;
+  final int count;
+  final List<List<NotesModel>>? allNotesList;
+  HomeScreenLoadedState({required this.dateTime, this.allNotesList,required this.count});
 
-  List<Object?> get props => [dateTime, goalsList];
+  @override
+  List<Object?> get props => [dateTime, allNotesList];
 
 }

@@ -1,5 +1,5 @@
 class Strings{
-  static const notes = "Notes";
+  static const notes = "Keep Note";
   static const notesList = "Notes List";
   static const dashBoard = "Dashboard";
   static const addNewNote = "Add New Note";

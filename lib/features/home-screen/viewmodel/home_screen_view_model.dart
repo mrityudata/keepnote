@@ -22,7 +22,7 @@ class HomeScreenViewModel{
     formatDate();
     getAllList();
     addAllList();
-    _homeBloc = HomeBloc()..add(HomeScreenLoadedEvent(dateTime: todayDate,goalsList: goalsList,count: count));
+    _homeBloc = HomeBloc()..add(HomeScreenLoadedEvent(dateTime: todayDate,allNotesList: allNotesList,count: count));
   }
   //function to format date
   void formatDate(){
@@ -87,5 +87,12 @@ class HomeScreenViewModel{
     allNotesList.add(laterList);
   }
 
+  void updateUI(){
+    getAllList();
+    addAllList();
+    Future.delayed(Duration(seconds: 2),(){
+      _homeBloc.add(HomeScreenLoadedEvent(dateTime: todayDate,allNotesList: allNotesList,count: count));
+    });
+  }
 
 }

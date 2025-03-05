@@ -16,6 +16,7 @@ class _EditNoteState extends State<EditNote> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        scrolledUnderElevation: 0.0,
         backgroundColor: Theme.of(context).primaryColor,
         centerTitle: true,
         title: Text(
@@ -32,6 +33,7 @@ class _EditNoteState extends State<EditNote> {
         child: Icon(Icons.edit, size: 24,color: Colors.black,),
         onPressed: (){
           editNotesViewModel.updateNote();
+          Navigator.pop(context,true);
         },
       ),
     );

@@ -1,12 +1,18 @@
 import '../../../app/index.dart';
 
-abstract class DetailsPageState{}
+abstract class DetailsPageState extends Equatable{}
 
-class DetailsPageLoadingState extends DetailsPageState{}
+class DetailsPageLoadingState extends DetailsPageState{
+  @override
+  List<Object> get props => [];
+}
 
 class DetailsPageLoadState extends DetailsPageState{
-  List<NotesModel> noteList;
-  Color color;
+  final List<NotesModel> noteList;
+  final Color color;
 
   DetailsPageLoadState({required this.noteList, required this.color});
+
+  @override
+  List<Object> get props => [noteList,color];
 }

@@ -57,7 +57,10 @@ class AddNewNoteViewModel{
       timeStamp: formatDateAsTimestamp()
     ).toJson();
     //insert data to Database
-    await DatabaseHelper().insertNote(noteMap);
+    int result = await DatabaseHelper().insertNote(noteMap);
+    if(result == 1){
+      actionManager.postAction(HomeScreenAction(isUpdated: true,selectedPriority: selectedPriority!));
+    }
   }
 
   int formatDateAsTimestamp() {

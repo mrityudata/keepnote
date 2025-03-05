@@ -5,7 +5,8 @@ export 'package:flutter_bloc/flutter_bloc.dart';
 export 'package:intl/intl.dart' hide TextDirection;
 export 'package:uuid/uuid.dart';
 export 'package:flutter/services.dart';
-
+export 'package:equatable/equatable.dart';
+export 'dart:async';
 
 
 //files exports
@@ -34,6 +35,16 @@ export 'package:keepnote/features/details-page/view/details_page_view.dart';
 export 'package:keepnote/features/edit-note/widget/edit_note_widget.dart';
 export 'package:keepnote/features/edit-note/view/edit_note.dart';
 export 'package:keepnote/features/edit-note/viewmodel/edit_note_viewmodel.dart';
+export 'package:keepnote/utils/common_widgets/screen_size.dart';
+export 'package:keepnote/utils/const/const_objects.dart';
+export 'package:keepnote/utils/actions/home-screen-actions/home_screen_action.dart';
+export 'package:keepnote/utils/core/global_action_manager.dart';
+export 'package:keepnote/utils/actions/details-page-action/details_page_action.dart';
+
+
+
+
+
 
 
 

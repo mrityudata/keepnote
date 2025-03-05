@@ -19,6 +19,9 @@ class EditNotesViewModel{
 
   Future<int> updateNote() async {
      final db = await DatabaseHelper().updateNote(noteId,  titleController.text, descController.text);
+     if(db == 1){
+       actionManager.postAction(DetailsPageAction(isUpdated: true,noteId: noteId));
+     }
      return db;
   }
 
