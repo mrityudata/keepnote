@@ -40,6 +40,15 @@ export 'package:keepnote/utils/const/const_objects.dart';
 export 'package:keepnote/utils/actions/home-screen-actions/home_screen_action.dart';
 export 'package:keepnote/utils/core/global_action_manager.dart';
 export 'package:keepnote/utils/actions/details-page-action/details_page_action.dart';
+export 'package:keepnote/utils/common_widgets/custom_background.dart';
+export 'package:shared_preferences/shared_preferences.dart';
+export 'package:keepnote/utils/pref/pref.dart';
+export 'package:lottie/lottie.dart';
+export 'package:keepnote/utils/pref/keys.dart';
+export 'package:keepnote/utils/app_assets/app_assets.dart';
+
+
+
 
 
 

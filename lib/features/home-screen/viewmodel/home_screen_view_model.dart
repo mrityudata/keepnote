@@ -13,6 +13,8 @@ class HomeScreenViewModel{
   List<NotesModel> marketList = [];
   List<NotesModel> laterList = [];
 
+  late StreamSubscription<dynamic> actionSubscription;
+
 
   List<String> priorityList = [Strings.urgent,Strings.myGoals,Strings.home,Strings.college,Strings.market,Strings.mayBeLater];
   List<Color> colorListAccordingToPriority = [Colors.red,Colors.purple,Colors.green,Colors.orange,Colors.yellow,Colors.blue];
@@ -27,6 +29,16 @@ class HomeScreenViewModel{
   //function to format date
   void formatDate(){
     todayDate = DateFormat('EEE, yyyy, MM, dd').format(DateTime.now());
+  }
+
+  listenForAction(){
+    actionSubscription = GlobalActionManager().eventStream.listen( (event){
+      if(event is HomeScreenAction){
+        if(event.isUpdated){
+          updateUI();
+        }
+      }
+    } );
   }
 
 
@@ -88,11 +100,23 @@ class HomeScreenViewModel{
   }
 
   void updateUI(){
+    clearAllList();
     getAllList();
     addAllList();
-    Future.delayed(Duration(seconds: 2),(){
+      log("UI Updated");
       _homeBloc.add(HomeScreenLoadedEvent(dateTime: todayDate,allNotesList: allNotesList,count: count));
-    });
+
+  }
+
+  void clearAllList(){
+     count = 0;
+     urgentList.clear();
+     goalsList.clear();
+     homeList.clear();
+     collegeList.clear();
+     marketList.clear();
+     laterList.clear();
+     allNotesList.clear();
   }
 
 }

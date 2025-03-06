@@ -10,26 +10,12 @@ class HomeScreenWidget extends StatefulWidget {
 
 class _HomeScreenWidgetState extends State<HomeScreenWidget> {
 
-  late StreamSubscription<dynamic> actionSubscription;
 
   @override
   void initState() {
     super.initState();
   }
 
-  _listenForAction(){
-    log("called");
-    actionSubscription = GlobalActionManager().eventStream.listen( (event){
-      log("isUpdated-1 ${event is HomeScreenAction}");
-      if(event is HomeScreenAction){
-        log("isUpdated0 ${event.isUpdated}");
-        if(event.isUpdated){
-          log("isUpdated1 ${event.isUpdated}");
-          widget.viewModel.updateUI();
-        }
-      }
-    } );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,13 +39,14 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                      ),
                      child: Row(
                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                       crossAxisAlignment: CrossAxisAlignment.start,
                        children: [
                          Column(
                            mainAxisAlignment: MainAxisAlignment.start,
                            crossAxisAlignment: CrossAxisAlignment.start,
                            children: [
                              Text(
-                               "Hi Amit!",
+                               "Hi ${Pref().getString(userName)}",
                                style: TextStyle(
                                    fontSize: 34
                                ),
@@ -77,10 +64,14 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                              final result = await Navigator.pushNamed(context, AppRoutes.addNewNote);
                              if(result == true){
                                log("rrr $result");
-                               _listenForAction();
+                               widget.viewModel.listenForAction();
                              }
                            },
-                             child: Icon(Icons.add_task_sharp,size: 30,))
+                             splashColor: Colors.transparent,
+                             child: Padding(
+                               padding: EdgeInsets.only(top: ScreenSize.height(context) * 0.012),
+                               child: Image.asset(AppAssets.icCreateIcon,height: ScreenSize.height(context) * 0.04,width: ScreenSize.width(context) * 0.08,),
+                             ))
                        ],
                      ),
                    ),
@@ -101,7 +92,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                    SizedBox(height: ScreenSize.height(context) * 0.025,),
                    Expanded(
                      child: Container(
-                       margin: EdgeInsets.symmetric(horizontal: ScreenSize.width(context) * 0.026),
+                       margin: EdgeInsets.symmetric(horizontal: ScreenSize.width(context) * 0.025),
                        child: GridView.builder(
                          physics: BouncingScrollPhysics(),
                          itemCount: 6,
@@ -121,8 +112,6 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                  );
                                },
                                child: Container(
-                                 height: ScreenSize.height(context) * 0.24,
-                                 width: ScreenSize.width(context) * 0.4,
                                  decoration: BoxDecoration(
                                      color:  widget.viewModel.colorListAccordingToPriority[index],
                                      borderRadius: BorderRadius.circular(25),
@@ -146,8 +135,9 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                       ),
                                       Container(
                                         padding: EdgeInsets.only(left: ScreenSize.width(context) * 0.03, top: ScreenSize.height(context) * 0.022),
-                                        height: ScreenSize.height(context) * 0.220,
+                                        height: ScreenSize.height(context) * 0.210,
                                         child : ListView.builder(
+                                          physics: NeverScrollableScrollPhysics(),
                                           itemCount: state.allNotesList![index].length,
                                           itemBuilder: (context,subIndex){
                                             return Text(state.allNotesList![index][subIndex].title

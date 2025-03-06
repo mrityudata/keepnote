@@ -1,3 +1,5 @@
+import 'package:keepnote/features/user-name/view/user_name.dart';
+
 import '../../../app/index.dart';
 
 class SplashScreen extends StatefulWidget{
@@ -14,7 +16,10 @@ class _SplashScreenState extends State<SplashScreen> {
     //after 3 sec move to next screen
     Future.delayed(Duration(seconds: 3),(){
       if(mounted) {
-        Navigator.pushReplacementNamed(context, AppRoutes.home);
+        String? user = Pref().getString(userName);
+        user == null ?
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => UserName()))
+            : Navigator.pushReplacementNamed(context, AppRoutes.home);
       }
     });
   }

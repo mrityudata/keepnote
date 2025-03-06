@@ -63,4 +63,10 @@ class DatabaseHelper{
    return result;
  }
 
+ Future<int> deleteNote(String id, String category) async {
+  final db = await database;
+  final result = await db!.delete('notes',where: 'id = ? AND tag = ?',whereArgs: [id,category]);
+  return result;
+ }
+
 }

@@ -26,6 +26,7 @@ class _AddNewNoteState extends State<AddNewNote> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        scrolledUnderElevation: 0.0,
         backgroundColor: Theme.of(context).primaryColor,
         centerTitle: true,
         title: Text(

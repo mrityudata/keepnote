@@ -1,4 +1,3 @@
-import 'package:keepnote/database/database_helper.dart';
 import '../../../app/index.dart';
 
 class AddNewNoteViewModel{
@@ -21,7 +20,6 @@ class AddNewNoteViewModel{
 
   void setSelectedPriorityValue(String? value){
     selectedPriority = value;
-    print("selectedPriority $selectedPriority");
   }
 
   void showDropDown(context){
@@ -34,7 +32,6 @@ class AddNewNoteViewModel{
         );}
       ).toList(),
       onChanged: (String? value) {
-        print("value $value");
       },
     );
   }
@@ -58,10 +55,11 @@ class AddNewNoteViewModel{
     ).toJson();
     //insert data to Database
     int result = await DatabaseHelper().insertNote(noteMap);
-    if(result == 1){
-      actionManager.postAction(HomeScreenAction(isUpdated: true,selectedPriority: selectedPriority!));
+      if(result > 0) {
+        log("Action Added $result");
+        actionManager.postAction(HomeScreenAction(isUpdated: true,selectedPriority: selectedPriority!));
+      }
     }
-  }
 
   int formatDateAsTimestamp() {
     return DateTime.now().millisecondsSinceEpoch; // Returns an integer timestamp

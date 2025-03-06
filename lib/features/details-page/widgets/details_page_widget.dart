@@ -39,12 +39,33 @@ class _DetailsPageWidget extends State<DetailsPageWidget>{
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                state.noteList[index].title,
-                                style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold
-                              ),),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Container(
+                                    width: ScreenSize.width(context) * 0.7,
+                                    decoration: BoxDecoration(
+                                      color: Colors.transparent
+                                    ),
+                                    child: Text(
+                                      state.noteList[index].title,
+                                      maxLines: 2,
+                                      softWrap: true,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold
+                                    ),),
+                                  ),
+
+                                  InkWell(
+                                    onTap: (){
+                                      widget.viewmodel.deleteNotes(state.noteList[index].id,widget.viewmodel.headingTag);
+                                      actionManager.postAction(DetailsPageAction(isUpdated: true,noteId: state.noteList[index].id!));
+                                    },
+                                      child: Icon(Icons.delete,size: 20,))
+                                ],
+                              ),
                               Text(
                                   state.noteList[index].description,
                                   softWrap: true,

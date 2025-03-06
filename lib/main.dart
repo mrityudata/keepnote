@@ -3,6 +3,7 @@ import 'app/index.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await DatabaseHelper().database;
+  await Pref.initSharedPref();
   runApp(const MyApp());
 }
 

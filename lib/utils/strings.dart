@@ -17,4 +17,7 @@ class Strings{
   static const pleaseFillRequire = "Please fill all the required fields.";
   static const allWithSpace = "All ";
   static const editNote = "Edit Note";
+  static const exceptionString = "SharedPreferences not initialized. Call initSharedPref() first.";
+  static const enterUserName = "Please enter username";
+  static const userName = "Enter Username";
 }
