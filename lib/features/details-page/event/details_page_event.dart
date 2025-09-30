@@ -10,3 +10,10 @@ class DetailsPageLoadEvent extends DetailsPageEvent{
 
   DetailsPageLoadEvent({required this.noteList, required this.color});
 }
+
+class DeleteNoteEvent extends DetailsPageEvent {
+  final String noteId;
+  final String headingTag;
+  final Color color;
+  DeleteNoteEvent({required this.noteId, required this.headingTag,required this.color});
+}

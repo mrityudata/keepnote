@@ -1,14 +1,23 @@
 import '../../../app/index.dart';
 
 class AddNewNoteWidget extends StatefulWidget {
-  final AddNewNoteViewModel viewModel;
+  final HomeScreenViewModel viewModel;
   const AddNewNoteWidget({super.key,required this.viewModel});
 
   @override
   State<AddNewNoteWidget> createState() => _AddNewNoteWidgetState();
 }
 
+
 class _AddNewNoteWidgetState extends State<AddNewNoteWidget> {
+
+  @override
+  void initState() {
+    super.initState();
+    widget.viewModel.clearController();
+    widget.viewModel.selectedPriority = Strings.urgent;
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -20,17 +29,17 @@ class _AddNewNoteWidgetState extends State<AddNewNoteWidget> {
               alignment: Alignment.centerRight,
               child: Container(
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.black,width: 1),
+                  border: Border.all(color: Colors.black,width: Dim.dim_1.r),
                   borderRadius: BorderRadius.circular(18)
                 ),
                 padding: EdgeInsets.only(
-                    left: 15,
-                  right: 10
+                    left: Dim.dim_15.w,
+                  right: Dim.dim_15.w,
                 ),
                 margin: EdgeInsets.only(
-                left: 15,
-                right: 25,
-                top: 25
+                left: Dim.dim_15.w,
+                right: Dim.dim_25.w,
+                top: Dim.dim_25.h,
                 ),
                 child: DropdownButton<String>(
                   underline: Container(),
@@ -52,7 +61,7 @@ class _AddNewNoteWidgetState extends State<AddNewNoteWidget> {
               ),
             ),
           Padding(
-            padding: EdgeInsets.only(top: 25.0,left: 25,right: 25),
+            padding: EdgeInsets.only(top: Dim.dim_25.h,left: Dim.dim_25.w,right: Dim.dim_25.w,),
             child: TextField(
               inputFormatters: [
                 LengthLimitingTextInputFormatter(25)
@@ -61,29 +70,29 @@ class _AddNewNoteWidgetState extends State<AddNewNoteWidget> {
                 hintText: Strings.title,
                 border: InputBorder.none,
                 hintStyle: TextStyle(
-                  fontSize: 32,
+                  fontSize: Dim.dim_32.sp,
                 )
               ),
               controller: widget.viewModel.titleController,
               style: TextStyle(
-                fontSize: 32,
+                fontSize: Dim.dim_32.sp,
               ),
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(top: 25.0,left: 25,right: 25),
+            padding: EdgeInsets.only(top: Dim.dim_25.h,left: Dim.dim_25.w,right: Dim.dim_25.w,),
             child: TextField(
               maxLines: 100,
               decoration: InputDecoration(
                   hintText: Strings.description,
                   border: InputBorder.none,
                   hintStyle: TextStyle(
-                    fontSize: 23,
+                    fontSize: Dim.dim_23.sp,
                   )
               ),
               controller: widget.viewModel.descController,
               style: TextStyle(
-                fontSize: 18,
+                fontSize: Dim.dim_18.sp,
               ),
               inputFormatters: [
                 LengthLimitingTextInputFormatter(1000)

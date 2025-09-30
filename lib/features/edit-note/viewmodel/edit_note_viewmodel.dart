@@ -18,11 +18,20 @@ class EditNotesViewModel{
   }
 
   Future<int> updateNote() async {
-     final db = await DatabaseHelper().updateNote(noteId,  titleController.text, descController.text);
-     if(db == 1){
-       actionManager.postAction(DetailsPageAction(isUpdated: true,noteId: noteId));
-     }
-     return db;
+    try{
+      final db = await DatabaseHelper().updateNote(noteId,  titleController.text, descController.text);
+      if(db == 1){
+        actionManager.postAction(DetailsPageAction(isUpdated: true,noteId: noteId));
+      }
+      return db;
+    }catch(e){
+      if (e is StateError && e.message.contains(Strings.cannotFindEvents)) {
+        debugPrint(Strings.blocClosed);
+      } else {
+        rethrow;
+      }
+      return 0;
+    }
   }
 
 }

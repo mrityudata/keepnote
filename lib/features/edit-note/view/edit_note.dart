@@ -16,6 +16,7 @@ class _EditNoteState extends State<EditNote> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         scrolledUnderElevation: 0.0,
         backgroundColor: Theme.of(context).primaryColor,
         centerTitle: true,
@@ -30,7 +31,7 @@ class _EditNoteState extends State<EditNote> {
       body: EditNoteWidget(notesList: widget.notesData,viewModel: editNotesViewModel,),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).primaryColor,
-        child: Icon(Icons.edit, size: 24,color: Colors.black,),
+        child: Icon(Icons.check_circle, size: 24.sp,color: Colors.black,),
         onPressed: (){
           editNotesViewModel.updateNote();
           Navigator.pop(context,true);

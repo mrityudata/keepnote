@@ -16,3 +16,11 @@ class DetailsPageLoadState extends DetailsPageState{
   @override
   List<Object> get props => [noteList,color];
 }
+
+class DetailsPageErrorState extends DetailsPageState {
+  final String error;
+  DetailsPageErrorState(this.error);
+
+  @override
+  List<Object?> get props => throw UnimplementedError();
+}

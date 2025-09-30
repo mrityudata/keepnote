@@ -20,15 +20,15 @@ class _UserNameState extends State<UserName> {
           Text(
             Strings.enterUserName,
             style: TextStyle(
-            fontSize: 18,
+            fontSize: Dim.dim_18.sp,
             fontWeight: FontWeight.bold
           ),),
           Container(
-            margin: EdgeInsets.symmetric(horizontal: 35,vertical: 20),
-            padding: EdgeInsets.symmetric(horizontal: 15),
+            margin: EdgeInsets.symmetric(horizontal: Dim.dim_35.w,vertical: Dim.dim_20.h),
+            padding: EdgeInsets.symmetric(horizontal: Dim.dim_15.w),
             decoration: BoxDecoration(
               border: Border.all(color: Colors.black),
-              borderRadius: BorderRadius.circular(18)
+              borderRadius: BorderRadius.circular(Dim.dim_18.r)
             ),
             child: TextField(
               controller: nameController,
@@ -46,7 +46,7 @@ class _UserNameState extends State<UserName> {
                 border: InputBorder.none
               ),
               style: TextStyle(
-                fontSize: 16,
+                fontSize: Dim.dim_16.sp,
                 fontWeight: FontWeight.w500
               ),
               inputFormatters: [

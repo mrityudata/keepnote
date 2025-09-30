@@ -25,7 +25,7 @@ class _EditNoteWidgetState extends State<EditNoteWidget> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: EdgeInsets.only(top: 25.0,left: 25,right: 25),
+            padding: EdgeInsets.only(top: 25.h,left: 25.w,right: 25.w),
             child: TextField(
               inputFormatters: [
                 LengthLimitingTextInputFormatter(25)

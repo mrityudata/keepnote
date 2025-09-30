@@ -7,6 +7,9 @@ export 'package:uuid/uuid.dart';
 export 'package:flutter/services.dart';
 export 'package:equatable/equatable.dart';
 export 'dart:async';
+export 'package:flutter_screenutil/flutter_screenutil.dart';
+export 'package:share_plus/share_plus.dart';
+
 
 
 //files exports
@@ -19,10 +22,9 @@ export 'package:keepnote/features/home-screen/viewmodel/home_screen_view_model.d
 export 'package:keepnote/features/home-screen/bloc/home_bloc.dart';
 export 'package:keepnote/features/home-screen/event/home_event.dart';
 export 'package:keepnote/features/home-screen/state/home_state.dart';
-export 'package:keepnote/features/add-new-note/view/add_new_note.dart';
+export 'package:keepnote/features/home-screen/view/add_new_note.dart';
 export 'package:keepnote/features/home-screen/view/home_screen.dart';
-export 'package:keepnote/features/add-new-note/widgets/add_new_note_widget.dart';
-export 'package:keepnote/features/add-new-note/viewmodel/add_new_note_viewmodel.dart';
+export 'package:keepnote/features/home-screen/widgets/add_new_note_widget.dart';
 export 'package:keepnote/model/notes.dart';
 export 'package:keepnote/database/database_helper.dart';
 export '../../../utils/const/colors.dart';
@@ -46,7 +48,8 @@ export 'package:keepnote/utils/pref/pref.dart';
 export 'package:lottie/lottie.dart';
 export 'package:keepnote/utils/pref/keys.dart';
 export 'package:keepnote/utils/app_assets/app_assets.dart';
-
+export 'package:keepnote/features/home-screen/repo/home_repo.dart';
+export 'package:keepnote/utils/Dim/dim.dart';
 
 
 

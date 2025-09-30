@@ -12,6 +12,7 @@ class DetailsPage extends StatefulWidget{
 
 class _DetailsPageState extends State<DetailsPage>{
   DetailsPageViewmodel detailsPageViewmodel = DetailsPageViewmodel();
+  HomeScreenViewModel homeScreenViewModel = HomeScreenViewModel();
 
   @override
   void initState() {
@@ -25,12 +26,19 @@ class _DetailsPageState extends State<DetailsPage>{
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Theme.of(context).primaryColor,
+        automaticallyImplyLeading: false,
         title: Text(
           widget.heading,
           style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold
           ),
+        ),
+        leading: InkWell(
+             onTap: (){
+               Navigator.pop(context,true);
+             },
+            child: Icon(Icons.arrow_back_ios)
         ),
       ),
       body: DetailsPageWidget(viewmodel: detailsPageViewmodel,)

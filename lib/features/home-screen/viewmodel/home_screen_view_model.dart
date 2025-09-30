@@ -1,9 +1,12 @@
+import 'package:flutter/foundation.dart';
 import '../../../app/index.dart';
 
 class HomeScreenViewModel{
   late HomeBloc _homeBloc;
+  final HomeRepo _homeRepo = HomeRepo();
   HomeBloc get  homeBloc => _homeBloc;
   late final String todayDate;
+  bool isLoading = false;
   int count = 0;
   List<List<NotesModel>> allNotesList = [];
   List<NotesModel> urgentList = [];
@@ -24,23 +27,63 @@ class HomeScreenViewModel{
     formatDate();
     getAllList();
     addAllList();
-    _homeBloc = HomeBloc()..add(HomeScreenLoadedEvent(dateTime: todayDate,allNotesList: allNotesList,count: count));
+    _homeBloc = HomeBloc(_homeRepo)..add(HomeScreenLoadedEvent(dateTime: todayDate,allNotesList: allNotesList,count: count));
   }
+
+  clearController(){
+    titleController.clear();
+    descController.clear();
+  }
+
   //function to format date
   void formatDate(){
     todayDate = DateFormat('EEE, yyyy, MM, dd').format(DateTime.now());
   }
 
-  listenForAction(){
+  addNewNote(BuildContext context,HomeScreenViewModel viewModel) async {
+    final routeValue = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => AddNewNote(viewModel: viewModel,homeBloc: context.read<HomeBloc>(),),
+      ),
+    );
+    if(routeValue == true){
+      if (kDebugMode) {
+        print("Routes value $routeValue");
+      }
+      listenForAction();
+    }
+  }
+
+  listenForAction([BuildContext? context]){
     actionSubscription = GlobalActionManager().eventStream.listen( (event){
-      if(event is HomeScreenAction){
+      if(event is HomeScreenNavigateBackAction){
         if(event.isUpdated){
-          updateUI();
+          if(context!.mounted) {
+            updateUI(context);
+          }
         }
       }
     } );
   }
 
+  Future<void> updateUI(BuildContext context) async {
+    try{
+      isLoading = true;
+      clearAllList();
+      await getAllList();
+      addAllList();
+      _homeBloc.add(HomeScreenLoadedEvent(dateTime: todayDate,allNotesList: allNotesList,count: count));
+      Future.delayed(Duration(seconds: 1),(){
+        isLoading = false;
+        if(context.mounted) {
+          Navigator.pop(context);
+        }
+      });
+    }catch(e){
+      debugPrint("Error : $e");
+    }
+  }
 
   //get note list
   void getUrgentList() async {
@@ -79,14 +122,25 @@ class HomeScreenViewModel{
     count += laterList.length;
   }
 
-  //get All List from DB
-  getAllList(){
-    getGoalList();
-    getHomeList();
-    getUrgentList();
-    getCollegeList();
-    getMarketList();
-    getMayBeLaterList();
+
+  Future<void> getAllList() async {
+    urgentList = await DatabaseHelper().getNoteList(Strings.urgent);
+    count += urgentList.length;
+
+    goalsList = await DatabaseHelper().getNoteList(Strings.myGoals);
+    count += goalsList.length;
+
+    homeList = await DatabaseHelper().getNoteList(Strings.home);
+    count += homeList.length;
+
+    collegeList = await DatabaseHelper().getNoteList(Strings.college);
+    count += collegeList.length;
+
+    marketList = await DatabaseHelper().getNoteList(Strings.market);
+    count += marketList.length;
+
+    laterList = await DatabaseHelper().getNoteList(Strings.mayBeLater);
+    count += laterList.length;
   }
 
   //Add all list in a single list
@@ -99,15 +153,6 @@ class HomeScreenViewModel{
     allNotesList.add(laterList);
   }
 
-  void updateUI(){
-    clearAllList();
-    getAllList();
-    addAllList();
-      log("UI Updated");
-      _homeBloc.add(HomeScreenLoadedEvent(dateTime: todayDate,allNotesList: allNotesList,count: count));
-
-  }
-
   void clearAllList(){
      count = 0;
      urgentList.clear();
@@ -117,6 +162,74 @@ class HomeScreenViewModel{
      marketList.clear();
      laterList.clear();
      allNotesList.clear();
+  }
+
+  TextEditingController titleController = TextEditingController();
+  TextEditingController descController = TextEditingController();
+
+  List<String> priorities = [Strings.urgent, Strings.myGoals, Strings.home, Strings.college,Strings.market,Strings.mayBeLater];
+
+  String? selectedPriority = Strings.urgent;
+
+  dispose(){
+    titleController.clear();
+    descController.clear();
+  }
+
+  void setSelectedPriorityValue(String? value){
+    selectedPriority = value;
+  }
+
+  void showDropDown(context){
+    DropdownButton<String>(
+      hint: Text(Strings.addTag),
+      items: priorities.map((item) {
+        return DropdownMenuItem(
+          value: item,
+          child: Text(item),
+        );}
+      ).toList(),
+      onChanged: (String? value) {
+      },
+    );
+  }
+
+  bool validation(){
+    if(titleController.text.isNotEmpty && descController.text.isNotEmpty && selectedPriority != null){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  Future<void> setFinalValues(BuildContext context,HomeBloc homeBloc) async {
+    final String uniqueId = Uuid().v4();
+    Map<String,dynamic> noteMap = NotesModel(
+        id: uniqueId,
+        tag: selectedPriority!,
+        title: titleController.text,
+        description: descController.text,
+        timeStamp: formatDateAsTimestamp()
+    ).toJson();
+    homeBloc.add(AddNoteEvent(newNote: noteMap));
+  }
+
+  int formatDateAsTimestamp() {
+    return DateTime.now().millisecondsSinceEpoch;
+  }
+
+  Future<void> refreshUI() async {
+    try {
+      isLoading = true;
+      clearAllList();
+      await getAllList();
+      addAllList();
+      _homeBloc.add(HomeScreenLoadedEvent(dateTime: todayDate, allNotesList: allNotesList, count: count));
+    } catch (e) {
+      debugPrint("Error refreshing UI: $e");
+    } finally {
+      isLoading = false; // No delayed pop here
+    }
   }
 
 }

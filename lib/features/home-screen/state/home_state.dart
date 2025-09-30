@@ -8,6 +8,20 @@ class HomeScreenLoadingState extends HomeState{
 
 }
 
+class AddNoteState extends HomeState{
+  final int result;
+  AddNoteState({required this.result});
+
+  @override
+  List<Object?> get props => [];
+}
+
+class NavigateBackState extends HomeState{
+  NavigateBackState();
+  @override
+  List<Object?> get props => [];
+}
+
 class HomeScreenLoadedState extends HomeState{
   final String dateTime;
   final int count;
@@ -15,6 +29,7 @@ class HomeScreenLoadedState extends HomeState{
   HomeScreenLoadedState({required this.dateTime, this.allNotesList,required this.count});
 
   @override
-  List<Object?> get props => [dateTime, allNotesList];
+  List<Object?> get props => [dateTime, allNotesList,count];
 
 }
+

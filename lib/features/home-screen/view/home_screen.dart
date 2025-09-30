@@ -1,20 +1,9 @@
 import '../../../app/index.dart';
 
-class HomeScreen extends StatefulWidget{
-  const HomeScreen({super.key});
+class HomeScreen extends StatelessWidget{
+  HomeScreen({super.key});
 
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
   final HomeScreenViewModel viewModel = HomeScreenViewModel();
-
-  @override
-  void initState() {
-    super.initState();
-    viewModel.init();
-  }
 
   @override
   Widget build(BuildContext context){
@@ -27,7 +16,7 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Text(
             Strings.dashBoard,
              style: TextStyle(
-               fontSize: 20,
+               fontSize: 20.sp,
                fontWeight: FontWeight.bold
              ),
         ),

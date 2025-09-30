@@ -1,5 +1,5 @@
-
 import '../../../app/index.dart';
+
 class DetailsPageWidget extends StatefulWidget{
   final DetailsPageViewmodel viewmodel;
   const DetailsPageWidget({super.key,required this.viewmodel});
@@ -57,11 +57,15 @@ class _DetailsPageWidget extends State<DetailsPageWidget>{
                                       fontWeight: FontWeight.bold
                                     ),),
                                   ),
-
                                   InkWell(
                                     onTap: (){
-                                      widget.viewmodel.deleteNotes(state.noteList[index].id,widget.viewmodel.headingTag);
-                                      actionManager.postAction(DetailsPageAction(isUpdated: true,noteId: state.noteList[index].id!));
+                                      context.read<DetailsBloc>().add(
+                                        DeleteNoteEvent(
+                                          noteId: state.noteList[index].id!,
+                                          headingTag: widget.viewmodel.headingTag,
+                                          color: state.color
+                                        ),
+                                      );
                                     },
                                       child: Icon(Icons.delete,size: 20,))
                                 ],
@@ -77,15 +81,34 @@ class _DetailsPageWidget extends State<DetailsPageWidget>{
                                   )
                               ),
                               Spacer(),
-                              Align(
-                                alignment: Alignment.bottomRight,
-                                  child: InkWell(
-                                    onTap: (){
-                                      widget.viewmodel.isEditValue(context,state.noteList[index]);
-                                    },
-                                    child: Icon(Icons.edit,size: 20,
-                                    ),
-                                  )),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Align(
+                                      alignment: Alignment.bottomRight,
+                                      child: InkWell(
+                                        onTap: (){
+                                          final shareParams  = ShareParams(
+                                            text: state.noteList[index].description
+                                          );
+                                          SharePlus.instance.share(shareParams);
+
+                                        },
+                                        child: Icon(Icons.share,size: 20,
+                                        ),
+                                      )),
+                                  SizedBox(width: 15.w,),
+                                  Align(
+                                    alignment: Alignment.bottomRight,
+                                      child: InkWell(
+                                        onTap: (){
+                                          widget.viewmodel.isEditValue(context,state.noteList[index]);
+                                        },
+                                        child: Icon(Icons.edit,size: 20,
+                                        ),
+                                      )),
+                                ],
+                              ),
                             ],
                           ),
                         ),

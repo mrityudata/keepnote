@@ -12,3 +12,15 @@ class HomeScreenAction extends Action{
     throw UnimplementedError();
   }
 }
+
+class HomeScreenNavigateBackAction extends Action{
+  final bool isUpdated;
+  HomeScreenNavigateBackAction({
+    required this.isUpdated,
+  });
+
+  @override
+  Object? invoke(Intent intent) {
+    throw UnimplementedError();
+  }
+}

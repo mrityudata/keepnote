@@ -22,6 +22,8 @@ dependencies:
   uuid:
   shared_preferences:
   lottie:
+  flutter_screenutil: ^5.9.3
+  share_plus: ^12.0.0
 
 dev_dependencies:
   flutter_test:

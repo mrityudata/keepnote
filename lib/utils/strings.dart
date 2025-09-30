@@ -20,4 +20,9 @@ class Strings{
   static const exceptionString = "SharedPreferences not initialized. Call initSharedPref() first.";
   static const enterUserName = "Please enter username";
   static const userName = "Enter Username";
+  static const errorMessage = "Error when saving note.";
+  static const blocClosed = "Bloc is closed, ignoring update";
+  static const cannotFindEvents = "Cannot add new events after calling close";
+  static const deleteFailed = "Delete failed";
+  static const errorDelete = "Error deleting note:";
 }
