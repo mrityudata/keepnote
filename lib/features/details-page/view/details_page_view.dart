@@ -12,7 +12,7 @@ class DetailsPage extends StatefulWidget{
 
 class _DetailsPageState extends State<DetailsPage>{
   DetailsPageViewmodel detailsPageViewmodel = DetailsPageViewmodel();
-  HomeScreenViewModel homeScreenViewModel = HomeScreenViewModel();
+  HomeScreenViewModel homeScreenViewModel = HomeScreenViewModel(homeRepo: HomeRepo());
 
   @override
   void initState() {

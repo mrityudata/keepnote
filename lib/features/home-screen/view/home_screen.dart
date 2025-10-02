@@ -3,7 +3,7 @@ import '../../../app/index.dart';
 class HomeScreen extends StatelessWidget{
   HomeScreen({super.key});
 
-  final HomeScreenViewModel viewModel = HomeScreenViewModel();
+  final HomeScreenViewModel viewModel = HomeScreenViewModel(homeRepo: HomeRepo());
 
   @override
   Widget build(BuildContext context){

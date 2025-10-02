@@ -10,7 +10,6 @@ class HomeScreenWidget extends StatefulWidget {
 
 class _HomeScreenWidgetState extends State<HomeScreenWidget> {
 
-
   @override
   void initState() {
     super.initState();

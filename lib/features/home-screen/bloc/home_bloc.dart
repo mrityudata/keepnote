@@ -6,6 +6,7 @@ class HomeBloc extends Bloc<HomeEvent,HomeState>{
   HomeBloc(this.homeRepo) : super(HomeScreenLoadingState()) {
 
     on<HomeScreenLoadedEvent>((event, emit) {
+      log("Total loads ${event.allNotesList}");
       emit(HomeScreenLoadedState(dateTime: event.dateTime, allNotesList: event.allNotesList, count: event.count));
     });
 

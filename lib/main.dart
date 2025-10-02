@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget{
             switch(settings.name){
               case AppRoutes.initialRoute : return MaterialPageRoute(builder: (_) => SplashScreen());
               case AppRoutes.home: return MaterialPageRoute(builder: (_) => HomeScreen());
-              case AppRoutes.addNewNote: return MaterialPageRoute(builder: (_) => AddNewNote(viewModel: HomeScreenViewModel(), homeBloc: HomeBloc(HomeRepo()),));
+              case AppRoutes.addNewNote: return MaterialPageRoute(builder: (_) => AddNewNote(viewModel: HomeScreenViewModel(homeRepo: HomeRepo()), homeBloc: HomeBloc(HomeRepo()),));
               default: return MaterialPageRoute(builder: (_) => HomeScreen());
             }
           },

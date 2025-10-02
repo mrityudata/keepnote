@@ -3,7 +3,7 @@ import '../../../app/index.dart';
 
 class HomeScreenViewModel{
   late HomeBloc _homeBloc;
-  final HomeRepo _homeRepo = HomeRepo();
+  final HomeRepo homeRepo;
   HomeBloc get  homeBloc => _homeBloc;
   late final String todayDate;
   bool isLoading = false;
@@ -22,12 +22,19 @@ class HomeScreenViewModel{
   List<String> priorityList = [Strings.urgent,Strings.myGoals,Strings.home,Strings.college,Strings.market,Strings.mayBeLater];
   List<Color> colorListAccordingToPriority = [Colors.red,Colors.purple,Colors.green,Colors.orange,Colors.yellow,Colors.blue];
 
+  HomeScreenViewModel({required this.homeRepo})
+      : _homeBloc = HomeBloc(homeRepo) {
+    _homeBloc.add(HomeScreenLoadedEvent(
+      dateTime: DateFormat('EEE, yyyy, MM, dd').format(DateTime.now()),
+      allNotesList: allNotesList,
+      count: count,
+    ));
+  }
   //init function
-  init(){
+  init() async {
     formatDate();
-    getAllList();
+    await getAllList();
     addAllList();
-    _homeBloc = HomeBloc(_homeRepo)..add(HomeScreenLoadedEvent(dateTime: todayDate,allNotesList: allNotesList,count: count));
   }
 
   clearController(){
