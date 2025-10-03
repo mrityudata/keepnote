@@ -1,6 +1,6 @@
 import '../../../app/index.dart';
 
-class DetailsPageViewmodel{
+class DetailsPageViewModel{
 
   late DetailsBloc _detailsBloc;
   DetailsBloc get detailsBloc => _detailsBloc;

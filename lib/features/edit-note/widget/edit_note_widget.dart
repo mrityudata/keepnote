@@ -34,29 +34,29 @@ class _EditNoteWidgetState extends State<EditNoteWidget> {
                   hintText: Strings.title,
                   border: InputBorder.none,
                   hintStyle: TextStyle(
-                    fontSize: 32,
+                    fontSize: 32.sp,
                   )
               ),
               controller: widget.viewModel.titleController,
               style: TextStyle(
-                fontSize: 32,
+                fontSize: 32.sp,
               ),
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(top: 25.0,left: 25,right: 25),
+            padding: EdgeInsets.only(top: 25.h,left: 25.w,right: 25.w),
             child: TextField(
               maxLines: 100,
               decoration: InputDecoration(
                   hintText: Strings.description,
                   border: InputBorder.none,
                   hintStyle: TextStyle(
-                    fontSize: 23,
+                    fontSize: 23.sp,
                   )
               ),
               controller: widget.viewModel.descController,
               style: TextStyle(
-                fontSize: 18,
+                fontSize: 18.sp,
               ),
               inputFormatters: [
                 LengthLimitingTextInputFormatter(1000)

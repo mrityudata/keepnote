@@ -45,3 +45,4 @@ class _AddNewNoteState extends State<AddNewNote> {
     );
   }
 }
+

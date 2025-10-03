@@ -119,19 +119,25 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                return InkWell(
                                  onTap: () async {
                                    actionManager.postAction(HomeScreenAction(isUpdated: true, selectedPriority: widget.viewModel.priorityList[index]));
-                                   final result = await Navigator.push(
+                                   await Navigator.push(
                                      context,
                                      MaterialPageRoute(
                                        builder: (_) => DetailsPage(
                                          listColor: widget.viewModel.colorListAccordingToPriority[index],
                                          heading: widget.viewModel.priorityList[index],
-                                         notesList: widget.viewModel.allNotesList[index],
+                                         notesList: state.allNotesList![index],
                                        ),
                                      ),
-                                   );
-                                   if (result == true && context.mounted) {
-                                     context.read<HomeBloc>().add(NavigateBackEvent());
-                                   }
+                                   ).then((result){
+                                     if (context.mounted) {
+                                       // Handle both explicit and gesture back
+                                       if (result == true) {
+                                         context.read<HomeBloc>().add(NavigateBackEvent());
+                                       } else {
+                                         context.read<HomeBloc>().add(NavigateBackEvent());
+                                       }
+                                     }
+                                   });
                                  },
                                  child: Container(
                                    decoration: BoxDecoration(

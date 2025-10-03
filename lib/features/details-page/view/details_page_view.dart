@@ -11,7 +11,7 @@ class DetailsPage extends StatefulWidget{
 }
 
 class _DetailsPageState extends State<DetailsPage>{
-  DetailsPageViewmodel detailsPageViewmodel = DetailsPageViewmodel();
+  DetailsPageViewModel detailsPageViewmodel = DetailsPageViewModel();
   HomeScreenViewModel homeScreenViewModel = HomeScreenViewModel(homeRepo: HomeRepo());
 
   @override
@@ -22,26 +22,29 @@ class _DetailsPageState extends State<DetailsPage>{
   }
   @override
   Widget build(BuildContext context){
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: Theme.of(context).primaryColor,
-        automaticallyImplyLeading: false,
-        title: Text(
-          widget.heading,
-          style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold
+    return PopScope(
+      canPop: true,
+      child: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          backgroundColor: Theme.of(context).primaryColor,
+          automaticallyImplyLeading: false,
+          title: Text(
+            widget.heading,
+            style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold
+            ),
+          ),
+          leading: InkWell(
+               onTap: (){
+                 Navigator.pop(context,true);
+               },
+              child: Icon(Icons.arrow_back_ios)
           ),
         ),
-        leading: InkWell(
-             onTap: (){
-               Navigator.pop(context,true);
-             },
-            child: Icon(Icons.arrow_back_ios)
-        ),
+        body: DetailsPageWidget(viewmodel: detailsPageViewmodel,)
       ),
-      body: DetailsPageWidget(viewmodel: detailsPageViewmodel,)
     );
   }
 }

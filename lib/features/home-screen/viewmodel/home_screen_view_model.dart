@@ -5,7 +5,7 @@ class HomeScreenViewModel{
   late HomeBloc _homeBloc;
   final HomeRepo homeRepo;
   HomeBloc get  homeBloc => _homeBloc;
-  late final String todayDate;
+  String? todayDate;
   bool isLoading = false;
   int count = 0;
   List<List<NotesModel>> allNotesList = [];
@@ -51,7 +51,7 @@ class HomeScreenViewModel{
     final routeValue = await Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (_) => AddNewNote(viewModel: viewModel,homeBloc: context.read<HomeBloc>(),),
+        builder: (_) => AddNewNote(viewModel: viewModel, homeBloc: _homeBloc,),
       ),
     );
     if(routeValue == true){
@@ -80,7 +80,7 @@ class HomeScreenViewModel{
       clearAllList();
       await getAllList();
       addAllList();
-      _homeBloc.add(HomeScreenLoadedEvent(dateTime: todayDate,allNotesList: allNotesList,count: count));
+      _homeBloc.add(HomeScreenLoadedEvent(dateTime: todayDate ?? DateFormat('EEE, yyyy, MM, dd').format(DateTime.now()),allNotesList: allNotesList,count: count));
       Future.delayed(Duration(seconds: 1),(){
         isLoading = false;
         if(context.mounted) {
@@ -231,7 +231,7 @@ class HomeScreenViewModel{
       clearAllList();
       await getAllList();
       addAllList();
-      _homeBloc.add(HomeScreenLoadedEvent(dateTime: todayDate, allNotesList: allNotesList, count: count));
+      _homeBloc.add(HomeScreenLoadedEvent(dateTime: todayDate ?? DateFormat('EEE, yyyy, MM, dd').format(DateTime.now()), allNotesList: allNotesList, count: count));
     } catch (e) {
       debugPrint("Error refreshing UI: $e");
     } finally {

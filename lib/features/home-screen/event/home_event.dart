@@ -23,3 +23,4 @@ class HomeScreenLoadedEvent extends HomeEvent{
   List<List<NotesModel>>? allNotesList = [];
   HomeScreenLoadedEvent({required this.dateTime, this.allNotesList,required this.count});
 }
+

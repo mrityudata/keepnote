@@ -1,7 +1,7 @@
 import '../../../app/index.dart';
 
 class DetailsPageWidget extends StatefulWidget{
-  final DetailsPageViewmodel viewmodel;
+  final DetailsPageViewModel viewmodel;
   const DetailsPageWidget({super.key,required this.viewmodel});
 
   @override
@@ -124,3 +124,4 @@ class _DetailsPageWidget extends State<DetailsPageWidget>{
     );
   }
 }
+
